@@ -1,0 +1,134 @@
+table: after defining all col -> specify constraint
+column: whever we define the column -> specify constraint
+
+pk:
+column : pk
+table: composite key
+
+fk
+column
+table
+
+not null:
+column
+no table
+
+unique
+table
+column
+
+check
+table
+column
+
+
+create user dummy identified by 'tiger';
+grant select, create on . to dummy;
+revoke select, create on . from dummy;
+===========================================
+DQL:
+
+all rows and all columns:
+select * from emp;
+
+all rows but specific columns:
+select ename,job,deptno from emp;
+
+specific rows , specific column
+select ename,job,deptno from emp
+where deptno=10;
+
+all columns but specific rows
+select * from emp
+where deptno=10;
+
++, -, *, /
+select 4*9-4+7
+
+select ename,(sal*12)
+from emp;
+
+select ename,(sal*12) as "Annual sal"
+from emp;
+
+select ename,sal, comm, sal+ifnull(comm,0) as "Total sal"
+from emp;
+
+>, <, <=, >=, <>, =
+
+select ename,sal, comm, sal+ifnull(comm,0) as "Total sal"
+from emp
+where sal+ifnull(comm,0)  > 1000;
+
+select ename,sal
+from emp
+where deptno=20
+
+and , or
+select ename,sal, deptno, job
+from emp
+where deptno=20 and job='Analyst';
+
+select ename,sal, deptno, job
+from emp
+where deptno=20 OR job='Manager';
+
+
+select ename,sal, deptno, job
+from emp
+where deptno=20 OR ( job='Manager' and sal > 3000) ;
+
+
+select ename,sal, deptno, job
+from emp
+where job='CLERK' or job='MANAGER' or JOB='PRESIDENT';
+
+select ename,sal, deptno, job
+from emp
+where job in ('CLERK','MANAGER','PRESIDENT');
+
+select ename,sal, deptno, job
+from emp
+where sal >=1000 and sal <= 3000;
+
+select ename,sal, deptno, job
+from emp
+where sal between 1000 and 3000;
+
+select ename,sal, deptno, job, comm
+from emp
+where comm IS NULL
+
+select ename,sal, deptno, job, comm
+from emp
+where ename like 'A%'
+
+select ename,sal, deptno, job, comm
+from emp
+where ename like '__N%'
+
+select deptno from emp
+union
+select deptno from dept;
+
+select deptno from emp
+union all
+select deptno from dept;
+
+select deptno from emp
+intersect
+select deptno from dept;
+
+
+select deptno from emp
+minus
+select deptno from dept;
+
+select deptno from dept
+minus
+select deptno from emp;
+
+1. ppt
+2. recording(constraints, operators)
+3. word assignments (constraints, operators)
+4. excel till Q24

@@ -1,0 +1,62 @@
+Single row sub query:
+<, <=, >, >=, !=, =
+select ename
+from emp
+where deptno=(select deptno from dept where dname='RESEARCH');
+
+select * 
+from emp where deptno=(select deptno from emp where ename='BLAKE');
+
+select * from emp where sal >= (select sal from emp where ename='SCOTT')
+and ename<> 'SCOTT';
+------------------------------------------------------------------------------------
+2. multi row , multi column sub query
+IN (=), NOT IN (!=)
+select * from emp
+where (deptno,sal) IN (select deptno, max(sal)
+from emp
+group by deptno)
+
+ANY, ALL (<, <=,> , >=)
+
+SELECT * FROM emp
+	WHERE sal > ANY ( SELECT sal FROM emp where 
+	 	            	job='SALESMAN' )
+	AND job <> 'SALESMAN';
+
+
+SELECT * FROM emp
+	WHERE sal > ALL ( SELECT sal FROM emp where 
+	 	            	job='SALESMAN' )
+	AND job <> 'SALESMAN';
+
+---------------------------------------------------------------------------------
+
+3. corelated sub query
+
+SELECT *
+FROM emp outer1					
+WHERE outer1.sal >(SELECT avg(sal) 	
+		   FROM emp inner1
+   		   WHERE inner1.deptno = outer1.deptno)
+
+
+exist:
+SELECT dname 
+FROM dept 
+WHERE EXISTS (SELECT * FROM emp WHERE
+			   emp.deptno = dept.deptno);
+
+
+
+SELECT dname 					
+FROM dept 					
+WHERE NOT EXISTS (SELECT * FROM emp WHERE					
+			   emp.deptno = dept.deptno);		
+
+
+5. inline view
+select KT.KSAL - MT.MSAL
+from 
+(select losal as KSAL from salgrade s, emp e where sal between losal and hisal and ename='KING')KT,
+(select sal as MSAL from emp where ename='MILLER')MT;

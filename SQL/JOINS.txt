@@ -1,0 +1,51 @@
+join:
+1. cartesian product, cartesian join:
+15*4= 60
+SELECT * 
+FROM table1 
+CROSS JOIN table2;
+
+-----------------------------------------------------
+2. inner join
+theta:
+select ename,dname
+from emp e, dept d
+where e.deptno=d.deptno and ename like 'A%';
+
+ansii:
+select ename,dname
+from emp e inner join dept d
+on e.deptno=d.deptno
+where ename like 'A%';
+-----------------------------------------------------
+3. outer join 
+
+a)left
+select ename,dname
+from emp e left outer join dept d
+on e.deptno=d.deptno;
+
+b)right
+select ename,dname
+from emp e right outer join dept d
+on e.deptno=d.deptno;
+
+c) full outer join
+select ename,dname
+from emp e left outer join dept d
+on e.deptno=d.deptno
+union
+select ename,dname
+from emp e right outer join dept d
+on e.deptno=d.deptno;
+----------------------------------------------------
+4.self join
+
+select w.ename, m.ename
+from emp w, emp m
+where w.mgr=m.empno and m.ename='BLAKE';
+
+select w.ename, m.ename
+from emp w inner join emp m
+on w.mgr=m.empno
+where m.ename='BLAKE';

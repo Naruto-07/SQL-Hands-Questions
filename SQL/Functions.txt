@@ -1,0 +1,75 @@
+select * from emp;
+select max(sal),min(sal),avg(sal),count(sal),sum(sal) 
+from emp;
+
+select max(comm),min(comm),avg(ifnull(comm,0)),count(ifnull(comm,0)),sum(comm) 
+from emp;
+
+select current_time(),current_user(),current_date()
+
+
+select ename,upper(ename),lower(ename), concat(ename,' ',job), substr(ename,2,3),
+trim(leading 'A' from ename), trim(trailing 'T' from ename)
+from emp;
+
+select sqrt(25), ceil(19.2), floor(19.9), round(100.234556,2), abs(-56)
+
+select hiredate,adddate(hiredate,interval 2 day),
+adddate(hiredate,interval 2 month),adddate(hiredate,interval 2 year)
+from emp;
+
+select ename,hiredate,datediff(current_date(), hiredate)/365, extract(day from hiredate)
+,extract(year from hiredate)
+from emp;
+
+select coalesce(comm,job)
+from emp;
+
+select nullif('Apple','apple')
+
+SELECT CASE 1 
+WHEN 11 THEN 'this is case one' 
+WHEN 2 THEN 'this is case two'  
+ELSE 'this is not in the case' 
+END as 'how to execute case statement'
+
+select ename,sal
+from emp
+order by sal desc
+limit 3
+
+=============================================
+
+select ename,deptno
+from emp
+order by ename
+
+select ename,deptno,sal,hiredate
+from emp
+order by ename desc
+
+select ename,deptno,sal,hiredate
+from emp
+order by 3 desc
+
+select ename,deptno,sal,hiredate
+from emp
+order by sal,ename desc;
+
+select ename,deptno,sal,hiredate
+from emp
+where sal > 1000
+order by sal,ename desc;
+
+select deptno,sum(sal)
+from emp
+group by deptno
+having sum(sal) > 9000;
+
+
+select deptno,sum(sal)
+from emp
+where sal > 1000
+group by deptno
+having sum(sal) > 8500
+order by sum(sal) desc;
